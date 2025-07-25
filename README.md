@@ -1,6 +1,6 @@
 # Keegan Carnell - Projects
 
-A curated collection of my data science and software engineering projects.
+A collection of my data science and software engineering projects.
 
 ---
 

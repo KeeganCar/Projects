@@ -11,13 +11,3 @@ A collection of my data science and software engineering projects.
 * **TheHuddle App Overview ([Write-up Link](link-to-folder/TheHuddle-README.md))**: High-level overview of this cross-platform application for social sports betting.
 * **Category Pirates AI Solutions ([Write-up Link](link-to-folder/CategoryPirates-AI-README.md))**: Summary of AI-driven web system development and API integration work.
 * **JumboCode Legal Data System ([Write-up Link](link-to-folder/JumboCode-README.md))**: Overview of backend architecture and medical data handling for Tufts General Counsel.
-
----
-
-### Skills Demonstrated
-
-**Languages:** Python, Java, C, C++, JavaScript, SQL
-
-**Frameworks/Libraries:** React, React Native, Firebase, Pandas, Matplotlib
-
-**Tools/APIs:** OpenAI API, HubSpot, WooCommerce, GitHub

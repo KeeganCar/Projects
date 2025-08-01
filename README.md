@@ -11,6 +11,6 @@ A collection of my data science and software engineering projects.
 
 ### Software Development
 
-* **[TheHuddle App Overview](link-to-folder/TheHuddle-README.md)**: High-level overview of this cross-platform application to capture the social side of sports betting.
+* **[TheHuddle App Overview](https://github.com/KeeganCar/Projects/tree/main/TheHuddle)**: High-level overview of this cross-platform application to capture the social side of sports betting.
 * **[Category Pirates AI Solutions](link-to-folder/CategoryPirates-AI-README.md)**: Summary of AI-driven learning platform and API integration work.
 * **[JumboCode Legal Data System](link-to-folder/JumboCode-README.md)**: Write-up of backend architecture and medical data handling for Tufts General Counsel.

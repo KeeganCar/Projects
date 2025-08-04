@@ -88,6 +88,4 @@ submission_df = test[['id', 'Personality']]
 # Save to CSV.
 submission_df.to_csv('submission.csv', index=False)
 
-print("\nSubmission file 'submission.csv' created successfully!")
-print("Head of submission file:")
-print(submission_df.head())
+print("\nSubmission file created.")

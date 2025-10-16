@@ -32,8 +32,10 @@ canvas {
 }
 </style>
 </head>
-<body>
+<head>
   <title height=20>Keegan Carnell Projects</title>
+</head>
+<body>
   <canvas id="game"></canvas>
   <script>
     // Setup canvas
@@ -54,6 +56,7 @@ canvas {
       LEFT: { x: -1, y: 0 },
       RIGHT: { x: 1, y: 0 }
     };
+    const DIRS = [directions.RIGHT, directions.DOWN, directions.LEFT, directions.UP];
 
     // Snake setup
     const snake = [];
@@ -108,7 +111,7 @@ canvas {
       const head = snake[0];
       let random = Math.random() * 3 - 1;
       dirIndex = (dirIndex + random) % 4;
-      direction = directions[dirIndex];
+      direction = DIRS[dirIndex];
       const newHead = {
         x: (head.x + direction.x + cols) % cols,
         y: (head.y + direction.y + rows) % rows

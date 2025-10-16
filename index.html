@@ -97,6 +97,7 @@ canvas {
     }
 
     function drawApples() {
+      const pad = 2;
       ctx.fillStyle = '#ff5454';
       for (const apple of apples) {
         const x = apple.x * gridSize + pad;

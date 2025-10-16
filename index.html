@@ -205,7 +205,7 @@ An html page featuring links to my projects and a visual snake roaming the scree
     let frameCount = 0;
     function update() {
       frameCount++;
-      if (frameCount % 60 === 0) moveSnake(); // slower for large grid
+      if (frameCount % 30 === 0) moveSnake(); // slower for large grid
       draw();
       requestAnimationFrame(update);
     }

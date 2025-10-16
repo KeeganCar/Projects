@@ -94,7 +94,9 @@ canvas {
         const h = gridSize - pad * 2;
         ctx.fillRect(x, y, w, h);
       }
+    }
 
+    function drawApples() {
       ctx.fillStyle = '#ff5454';
       for (const apple of apples) {
         const x = apple.x * gridSize + pad;
@@ -104,9 +106,10 @@ canvas {
         ctx.fillRect(x, y, w, h);
       }
     }
-
+    
     function draw() {
       drawSnake();
+      drawApples();
     }
 
     // --- Animation ---

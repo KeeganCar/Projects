@@ -9,7 +9,6 @@ An html page featuring links to my projects and a visual snake roaming the scree
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title height=20>Keegan Carnell Projects</title>
 <style>
 body {
   margin: 0;
@@ -34,8 +33,8 @@ canvas {
 </style>
 </head>
 <body>
+  <title height=20>Keegan Carnell Projects</title>
   <canvas id="game"></canvas>
-  <div>Keegan Carnell Projects</div>
   <script>
     // Setup canvas
     const canvas = document.getElementById('game');
@@ -93,8 +92,29 @@ canvas {
       drawSnake();
     }
 
-    // Initial paint
-    draw();
+    // --- Animation ---
+    let frameCount = 0;
+    function update() {
+      frameCount++;
+      if (frameCount % 15 === 0) {
+        moveSnake();
+      }
+      draw();
+      requestAnimationFrame(update);
+    }
+
+    function moveSnake() {
+      const head = snake[0];
+      const newHead = {
+        x: (head.x + direction.x + cols) % cols,
+        y: (head.y + direction.y + rows) % rows
+      };
+      snake.unshift(newHead);
+      while (snake.length > snakeLength) snake.pop();
+    }
+
+    // Start animation
+    requestAnimationFrame(update);
   </script>
 </body>
 </html>

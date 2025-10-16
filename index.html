@@ -75,6 +75,10 @@ An html page featuring links to my projects and a visual snake roaming the scree
     const gridSize = 100; // larger cells
     const cols = Math.floor(canvas.width / gridSize);
     const rows = Math.floor(canvas.height / gridSize);
+    // Reserve some vertical space at the top for the title
+    const titleHeight = 150; // pixels of blocked area (adjust if needed)
+    const blockedRows = Math.ceil(titleHeight / gridSize);
+
 
     // Directions (clockwise)
     const directions = {
@@ -122,7 +126,7 @@ An html page featuring links to my projects and a visual snake roaming the scree
         do {
             newApple = {
             x: Math.floor(Math.random() * cols),
-            y: Math.floor(Math.random() * rows),
+            y: Math.floor(Math.random() * (rows - blockedRows)) + blockedRows,
             url: proj.url,
             label: proj.label
             };
@@ -175,7 +179,7 @@ An html page featuring links to my projects and a visual snake roaming the scree
         ctx.fillStyle = '#3f3f3f'; // dark gray for contrast
 
         // If label would go off-canvas at the top, draw it below with padding.
-        const labelPadding = 8;
+        const labelPadding = 4;
         const labelAboveY = y - labelPadding;
         const labelBelowY = y + h + labelPadding;
         // Estimate text height ~ font size

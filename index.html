@@ -62,6 +62,10 @@ canvas {
     const snake = [];
     const snakeLength = 7;
 
+    // Apples setup
+    const pair1 = {x:5, y:5};
+    const apples = [pair1];
+
     // Initialize snake roughly centered
     const startX = Math.floor(cols / 2);
     const startY = Math.floor(rows / 2);
@@ -88,6 +92,15 @@ canvas {
         const y = seg.y * gridSize + pad;
         const w = gridSize - pad * 2;
         const h = gridSize - pad * 2;
+        ctx.fillRect(x, y, w, h);
+      }
+
+      ctx.fillStyle = '#ff5454';
+      for (const apple of apples) {
+        const x = apple.x * gridSize + pad;
+        const y = apple.y * gridSize + pad;
+        const w = gridSize - pad * 2;
+        const w = gridSize - pad * 2;
         ctx.fillRect(x, y, w, h);
       }
     }

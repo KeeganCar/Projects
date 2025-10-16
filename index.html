@@ -1,178 +1,32 @@
-<!doctype html>
+<!-- 
+Keegan Carnell
+GitHub Website Page
+index.html
+An html page featuring links to my projects and a visual snake roaming the screen.
+-->
+<!--doctype html-->
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Snake Wanderer</title>
-  <style>
-    :root { --bg: #0f1220; --grid: #1e223a; --snake: #5eead4; }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; background: var(--bg); color: white; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
-    .wrap { display: grid; place-items: center; min-height: 100%; padding: 24px; }
-    canvas { width: min(92vw, 720px); aspect-ratio: 16 / 10; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06); }
-    .hud { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); opacity: 0.85; font-size: 14px; }
-    .hud kbd { background: #11162a; padding: 4px 8px; border-radius: 6px; border: 1px solid #2a3157; }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Keegan Carnell Projects</title>
+<style>
+body {
+margin: 0;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #b3e5fc; /* powder light blue */
+color: #f8f9fa; /* off white */
+font-family: 'Helvetica Neue', Arial, sans-serif;
+font-size: 2.5rem;
+font-weight: 600;
+letter-spacing: 1px;
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <canvas id="game"></canvas>
-  </div>
-  <div class="hud">Click / <kbd>Space</kbd> to pause · FPS ~60 · 7 segments</div>
-
-  <script>
-  (() => {
-    const canvas = document.getElementById('game');
-    const ctx = canvas.getContext('2d');
-
-    const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-    const GRID = 20;            // pixel size of one grid cell (at CSS pixels before DPR)
-    const COLS = 36;            // grid columns
-    const ROWS = 22;            // grid rows
-
-    function resize() {
-      // Use CSS size from aspect-ratio and scale internal buffer for crispness
-      const cssW = canvas.clientWidth;
-      const cssH = canvas.clientHeight;
-      canvas.width = Math.floor(cssW * DPR);
-      canvas.height = Math.floor(cssH * DPR);
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    // World state
-    const maxLen = 7;
-    let snake = [];
-    let dir = { x: 1, y: 0 };  // initial direction
-    let paused = false;
-
-    // Initialize snake in center
-    const startX = Math.floor(COLS / 2);
-    const startY = Math.floor(ROWS / 2);
-    for (let i = 0; i < maxLen; i++) snake.push({ x: startX - i, y: startY });
-
-    // Utility
-    const dirs = [ {x:1,y:0}, {x:-1,y:0}, {x:0,y:1}, {x:0,y:-1} ];
-    function equal(a,b){ return a.x===b.x && a.y===b.y; }
-    function inBounds(p){ return p.x>=0 && p.y>=0 && p.x<COLS && p.y<ROWS; }
-    function occupied(p){ return snake.some(s => equal(s, p)); }
-
-    // Choose a direction that does not immediately crash. Randomly favors continuing.
-    function chooseDirection() {
-      const head = snake[0];
-      const candidates = [];
-
-      for (const d of dirs) {
-        // avoid 180° reversals
-        if (snake.length > 1 && equal({x:-dir.x, y:-dir.y}, d)) continue;
-        const next = { x: head.x + d.x, y: head.y + d.y };
-        if (inBounds(next) && !occupied(next)) candidates.push(d);
-      }
-
-      // Slight bias toward continuing straight if valid
-      const straight = { x: dir.x, y: dir.y };
-      const canStraight = candidates.some(d => equal(d, straight));
-      if (canStraight && Math.random() < 0.6) return straight;
-
-      if (candidates.length === 0) {
-        // If trapped, ignore self-collision rule and bounce off walls
-        for (const d of dirs) {
-          if (snake.length > 1 && equal({x:-dir.x, y:-dir.y}, d)) continue;
-          const next = { x: head.x + d.x, y: head.y + d.y };
-          if (inBounds(next)) return d;
-        }
-        return straight; // fallback
-      }
-      return candidates[Math.floor(Math.random() * candidates.length)];
-    }
-
-    // Timing
-    const stepMs = 100; // 10 fps movement; canvas still renders at display rate
-    let lastStep = performance.now();
-
-    function tick(now) {
-      if (!paused && now - lastStep >= stepMs) {
-        advance();
-        lastStep = now;
-      }
-      draw();
-      requestAnimationFrame(tick);
-    }
-
-    function advance() {
-      dir = chooseDirection();
-      const head = snake[0];
-      let next = { x: head.x + dir.x, y: head.y + dir.y };
-
-      // If out of bounds, bounce by flipping direction component
-      if (!inBounds(next)) {
-        if (next.x < 0 || next.x >= COLS) dir.x *= -1;
-        if (next.y < 0 || next.y >= ROWS) dir.y *= -1;
-        next = { x: head.x + dir.x, y: head.y + dir.y };
-      }
-
-      // Move: add new head, trim tail to fixed length
-      snake.unshift(next);
-      while (snake.length > maxLen) snake.pop();
-    }
-
-    function drawGrid() {
-      const w = canvas.clientWidth, h = canvas.clientHeight;
-      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg');
-      ctx.fillRect(0, 0, w, h);
-      ctx.beginPath();
-      const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--grid');
-      ctx.strokeStyle = gridColor;
-      ctx.lineWidth = 1;
-      for (let x = 0; x <= COLS; x++) {
-        ctx.moveTo(x * (w / COLS), 0);
-        ctx.lineTo(x * (w / COLS), h);
-      }
-      for (let y = 0; y <= ROWS; y++) {
-        ctx.moveTo(0, y * (h / ROWS));
-        ctx.lineTo(w, y * (h / ROWS));
-      }
-      ctx.stroke();
-    }
-
-    function drawSnake() {
-      const w = canvas.clientWidth, h = canvas.clientHeight;
-      const cellW = w / COLS, cellH = h / ROWS;
-      const color = getComputedStyle(document.documentElement).getPropertyValue('--snake');
-
-      for (let i = snake.length - 1; i >= 0; i--) {
-        const seg = snake[i];
-        const pad = 2 + (snake.length - 1 - i) * 0.3; // subtle taper
-        const x = seg.x * cellW + pad;
-        const y = seg.y * cellH + pad;
-        const cw = cellW - pad * 2;
-        const ch = cellH - pad * 2;
-        const r = Math.min(10, Math.min(cw, ch) / 3);
-
-        ctx.fillStyle = color;
-        roundRect(ctx, x, y, cw, ch, r);
-        ctx.fill();
-      }
-    }
-
-    function roundRect(ctx, x, y, w, h, r) {
-      ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.arcTo(x + w, y, x + w, y + h, r);
-      ctx.arcTo(x + w, y + h, x, y + h, r);
-      ctx.arcTo(x, y + h, x, y, r);
-      ctx.arcTo(x, y, x + w, y, r);
-      ctx.closePath();
-    }
-
-    // Interactions
-    function togglePause(){ paused = !paused; }
-    window.addEventListener('click', togglePause);
-    window.addEventListener('keydown', (e) => { if (e.code === 'Space') { e.preventDefault(); togglePause(); } });
-
-    requestAnimationFrame(tick);
-  })();
-  </script>
+Keegan Carnell Projects
 </body>
 </html>

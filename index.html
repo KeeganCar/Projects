@@ -68,6 +68,7 @@ canvas {
 
     // Starting direction
     let direction = directions.RIGHT;
+    let dirIndex = 3;
 
     console.log('Snake initialized:', snake);
     console.log('Direction:', direction);
@@ -105,8 +106,9 @@ canvas {
 
     function moveSnake() {
       const head = snake[0];
-      let random = MATH.random() * 3 - 1;
-      direction = direction + random;
+      let random = Math.random() * 3 - 1;
+      dirIndex = (dirIndex + random) / 4;
+      direction = directions[dirIndex];
       const newHead = {
         x: (head.x + direction.x + cols) % cols,
         y: (head.y + direction.y + rows) % rows

@@ -12,21 +12,89 @@ An html page featuring links to my projects and a visual snake roaming the scree
 <title height=20>Keegan Carnell Projects</title>
 <style>
 body {
-margin: 0;
-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: #b3e5fc; /* powder light blue */
-color: #f8f9fa; /* off white */
-font-family: 'Helvetica Neue', Arial, sans-serif;
-font-size: 2.5rem;
-font-weight: 600;
-letter-spacing: 1px;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b3e5fc; /* powder light blue */
+  color: #f8f9fa; /* off white */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
 </head>
 <body>
-Keegan Carnell Projects
+  <canvas id="game"></canvas>
+  <div>Keegan Carnell Projects</div>
+  <script>
+    // Setup canvas
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Basic grid settings
+    const gridSize = 20;
+    const cols = Math.floor(canvas.width / gridSize);
+    const rows = Math.floor(canvas.height / gridSize);
+
+    // Direction constants
+    const directions = {
+      UP: { x: 0, y: -1 },
+      DOWN: { x: 0, y: 1 },
+      LEFT: { x: -1, y: 0 },
+      RIGHT: { x: 1, y: 0 }
+    };
+
+    // Snake setup
+    const snake = [];
+    const snakeLength = 7;
+
+    // Initialize snake roughly centered
+    const startX = Math.floor(cols / 2);
+    const startY = Math.floor(rows / 2);
+    for (let i = 0; i < snakeLength; i++) {
+      snake.push({ x: startX - i, y: startY });
+    }
+
+    // Starting direction
+    let direction = directions.RIGHT;
+
+    console.log('Snake initialized:', snake);
+    console.log('Direction:', direction);
+      // --- Draw helpers ---
+    function drawSnake() {
+      // Keep canvas transparent so the body's powder blue shows through
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const pad = 2;
+      ctx.fillStyle = '#f8f9fa';
+
+      for (const seg of snake) {
+        const x = seg.x * gridSize + pad;
+        const y = seg.y * gridSize + pad;
+        const w = gridSize - pad * 2;
+        const h = gridSize - pad * 2;
+        ctx.fillRect(x, y, w, h);
+      }
+    }
+
+    function draw() {
+      drawSnake();
+    }
+
+    // Initial paint
+    draw();
+  </script>
 </body>
 </html>

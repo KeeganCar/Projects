@@ -12,9 +12,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 // placeholder content for now
 const feedData = [
-  { id: '1', user: 'nfl_guru', group: 'NFL Fans', content: 'Who is your Super Bowl pick for this year?' },
-  { id: '2', user: 'jordan_fan', group: 'NBA', content: 'Is LeBron the GOAT? Hot take!' },
-  { id: '3', user: 'dave_from_work', group: 'Office League', content: 'My 4-leg parlay for tonight just hit! 🤑' },
+  { id: '1', user: 'person1', group: 'NFL', content: 'Big Win' },
+  { id: '2', user: 'person2', group: 'NBA', content: 'Lebrrrroooon' },
+  { id: '3', user: 'person3', group: 'Office League', content: 'No way that missed...' },
 ];
 
 export default function FeedScreen() {

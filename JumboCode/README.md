@@ -1,7 +1,5 @@
 # Tufts Legal Counsel Data Management System (JumboCode Project)  
 
-**Status:** Completed  
-
 ## Concept  
 
 The Tufts University Office of Legal Counsel managed a large volume of contracts and case information, including **hundreds of gigabytes of sensitive medical data**, using outdated, fragmented systems. This made searching, updating, and organizing legal records slow and inefficient.  

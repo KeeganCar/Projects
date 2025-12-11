@@ -1,4 +1,4 @@
-# TheHuddle (React Native + Expo Example)
+# TheHuddle
 
 This is a demo of a social platform app built with Expo Router, Firebase Auth, Firestore, and Storage.
 - Auth flow (sign-in / sign-up modal)

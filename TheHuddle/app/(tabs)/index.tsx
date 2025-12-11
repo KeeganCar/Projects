@@ -10,13 +10,6 @@
 
 import { StyleSheet, Text, View } from 'react-native';
 
-// placeholder content for now
-const feedData = [
-  { id: '1', user: 'person1', group: 'NFL', content: 'Big Win' },
-  { id: '2', user: 'person2', group: 'NBA', content: 'Lebrrrroooon' },
-  { id: '3', user: 'person3', group: 'Office League', content: 'No way that missed...' },
-];
-
 export default function FeedScreen() {
   return (
     <View style={styles.container}>

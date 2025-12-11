@@ -2,8 +2,6 @@
 
 A collection of my data science and software engineering projects.
 
----
-
 ### Data Science & Machine Learning
 
 * **[Fertilizer Prediction](https://github.com/KeeganCar/Projects/blob/main/KaggleCompetitions/fertilizerComp.py)**: A XGBoost model to predict the fertilizer for soil data.

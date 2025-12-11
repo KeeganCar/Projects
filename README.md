@@ -6,6 +6,7 @@ A collection of my data science and software engineering projects.
 
 * **[Fertilizer Prediction](https://github.com/KeeganCar/Projects/blob/main/KaggleCompetitions/fertilizerComp.py)**: A XGBoost model to predict the fertilizer for soil data.
 * **[Personality Prediction](https://github.com/KeeganCar/Projects/blob/main/KaggleCompetitions/personalityComp.py)**: A K Nearest Neighbors model to predict the personality type of an individual based on survey results.
+* **[Tee Time Strategy Testing](https://github.com/KeeganCar/Projects/tree/main/Mathematical%20Modeling#:~:text=Mathematical-,Modeling)**: A simulated golf tee time strategy testing program.
 
 ### Software Development
 
